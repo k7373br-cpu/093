@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Infinity Traffic - Elite AI Signals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #0088ff;
+            --accent-glow: rgba(0, 136, 255, 0.4);
+            --bg-deep: #050505;
+            --bg-card: #0b0e11;
+            --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            outline: none !important;
+        }
+        html, body {
+            height: 100%;
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            margin: 0;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        #root {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .overflow-y-auto {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Premium Transitions */
+        @keyframes softIn {
+            from { opacity: 0; transform: translateY(12px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-soft-in { animation: softIn 0.4s var(--ease-premium) forwards; }
+
+        /* Icon Path Drawing Animation */
+        @keyframes draw {
+          from { stroke-dashoffset: 40; }
+          to { stroke-dashoffset: 0; }
+        }
+        .animate-path-draw {
+          stroke-dasharray: 40;
+          stroke-dashoffset: 40;
+          animation: draw 0.5s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        /* Floating Animation for Icons */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Shimmer Effect for Buttons */
+        @keyframes shimmer-move {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            50%, 100% { transform: translateX(150%) skewX(-20deg); }
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer-move 4s infinite;
+        }
+
+        /* Result Ring Pulse */
+        @keyframes ring-expand {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+        .ring-pulse {
+            position: absolute;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            animation: ring-expand 1.2s ease-out infinite;
+        }
+
+        @keyframes icon-active-pop {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .animate-icon-pop { animation: icon-active-pop 0.4s var(--ease-premium); }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* --- SUPREME LOGO ANIMATIONS --- */
+        @keyframes silver-shimmer {
+            0% { background-position: -100% 0; text-shadow: 0 0 0px rgba(255,255,255,0); }
+            50% { text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+            100% { background-position: 200% 0; text-shadow: 0 0 0px rgba(255,255,255,0); }
+        }
+        .silver-liquid {
+            background: linear-gradient(110deg, #999 0%, #fff 45%, #fff 55%, #999 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: silver-shimmer 4s var(--ease-premium) infinite;
+        }
+
+        @keyframes wet-shimmer {
+            0% { background-position: -200% 0; filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(15deg); }
+            100% { background-position: 200% 0; filter: hue-rotate(0deg); }
+        }
+        .wet-effect {
+            background: linear-gradient(90deg, #00f2ff 0%, #ffffff 50%, #0077ff 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: wet-shimmer 6s linear infinite;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 5px; height: 5px;
+            background: #00f2ff;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 1);
+            opacity: 0;
+            z-index: 50;
+        }
+        @keyframes drip {
+            0% { transform: translateY(-10px) scale(0.3); opacity: 0; }
+            5% { transform: translateY(-2px) scale(1.1, 0.7); opacity: 1; }
+            40% { transform: translateY(22px) scale(0.6, 1.8); opacity: 1; }
+            45% { transform: translateY(26px) scale(2, 0.4); opacity: 0; }
+            100% { transform: translateY(26px) scale(2, 0.4); opacity: 0; }
+        }
+        .animate-drip { animation: drip 4.5s infinite cubic-bezier(0.5, 0, 0.7, 0.4); }
+
+        @keyframes splash-flash {
+            0%, 41% { opacity: 0; transform: scale(0.5); }
+            42% { opacity: 1; transform: scale(1.2); }
+            48% { opacity: 0; transform: scale(1.5); }
+            100% { opacity: 0; }
+        }
+        .splash-fx {
+            position: absolute; width: 20px; height: 10px;
+            background: radial-gradient(ellipse, rgba(0, 242, 255, 0.4) 0%, transparent 70%);
+            animation: splash-flash 4.5s infinite;
+        }
+
+        @keyframes bar-breathe {
+            0%, 100% { height: 15px; transform: translateY(0); filter: brightness(1); }
+            50% { height: 32px; transform: translateY(-12px); filter: brightness(1.5); }
+        }
+        .animate-bar { animation: bar-breathe 2.5s ease-in-out infinite; transform-origin: bottom; }
+
+        @keyframes circle-pulse {
+            0%, 100% { opacity: 0.3; stroke-width: 1; }
+            50% { opacity: 0.8; stroke-width: 3; filter: drop-shadow(0 0 8px #0088ff); }
+        }
+        .animate-circle-glow { animation: circle-pulse 3s ease-in-out infinite; }
+
+        @keyframes path-pulse {
+            0% { stroke-dashoffset: 240; opacity: 0; }
+            100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        .quantum-path { stroke-dasharray: 120; animation: path-pulse 4s linear infinite; }
+
+        @keyframes float-dot {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            50% { transform: translate(0, -5px) scale(1.4); opacity: 1; filter: drop-shadow(0 0 5px white); }
+        }
+        .animate-energy-dot { animation: float-dot 3s ease-in-out infinite; }
+
+        .btn-back-normal {
+            height: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 14px;
+            transition: all 0.25s var(--ease-premium);
+            width: 100%;
+            max-width: 340px;
+        }
+        .btn-back-normal:active { transform: scale(0.95); background: rgba(255, 255, 255, 0.08); }
+
+        .safe-pb { padding-bottom: var(--safe-bottom); }
+        .safe-pt { padding-top: var(--safe-top); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
